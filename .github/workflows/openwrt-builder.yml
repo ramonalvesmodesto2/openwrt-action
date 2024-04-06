@@ -80,10 +80,9 @@ jobs:
         make target/linux/{clean,prepare} V=s QUILT=1
         cd build_dir/target-*/linux-*/linux-*
         wget https://raw.githubusercontent.com/ramonalvesmodesto2/linux/master/patches/0014-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch -O  patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
-        quilt new patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
-        quilt import patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
-        quilt refresh
         quilt push -a
+        quilt refresh 
+        quilt new patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
         cd ../../../../ 
         make target/linux/update
         make target/linux/{clean,prepare} V=s QUILT=1
