@@ -50,7 +50,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        git clone $REPO_URL -b $REPO_BRANCH
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
         git checkout v22.03.5 
@@ -88,8 +88,9 @@ jobs:
         cd openwrt
         make target/linux/{clean,prepare} V=s QUILT=1
         cd build_dir/target-*/linux-*/linux-*
-        wget https://raw.githubusercontent.com/cloudflare/linux/master/patches/0014-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch -O  patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
+        wget https://raw.githubusercontent.com/ramonalvesmodesto2/linux/master/patches/0014-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch -O  patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
         quilt new patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
+        quilt import patches/generic/689-add-a-sysctl-to-enable-disable-tcp_collapse-logic.patch
         quilt refresh
         quilt push -a
         cd ../../../../ 
